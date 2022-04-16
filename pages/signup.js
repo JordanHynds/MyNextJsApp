@@ -14,8 +14,9 @@ export default function Login() {
         event.preventDefault;
         try {
             const user = await updateService({
-                username, password,
-            })
+                username, password, email
+            });
+            console.log(user)
         }
         catch (exception) {
             console.log(exception)
@@ -37,7 +38,7 @@ export default function Login() {
                             value={username}
                             onChange={(event) => setUsername(event.target.value)}
                         />
-                        <label>Enter UserName</label>
+                        <label>Enter Password</label>
                         <input
                             value={password}
                             onChange={(event) => setPassword(event.target.value)}

@@ -1,8 +1,7 @@
 import axios from "axios"
-const baseUrl = "/api/update"
+const baseUrl = "/api/signup"
 
 export default async function updateService(credentials) {
-    console.log(credentials)
     const response = await axios.post(baseUrl, credentials)
-    //return response.data
+    return response.data;
 }

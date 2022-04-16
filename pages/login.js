@@ -2,19 +2,27 @@ import { useState } from 'react'
 import { PageLayout } from '../Components/PageLayout'
 import styles from '../styles/Home.module.css'
 import loginService from '../services/Login'
-
+import { useAppContext } from '../Context'
+import { useRouter } from 'next/router'
+import { TextField } from '@mui/material'
+import { Button } from '@mui/material'
 
 export default function Login() {
     const [password, setPassword] = useState("")
     const [username, setUsername] = useState("")
-
+    const { setUser } = useAppContext();
+    const router = useRouter()
 
     const handleSubmit = async (event) => {
-        event.preventDefault;
+        event.preventDefault();
         try {
             const user = await loginService({
-                username, password,
+                username, password
             })
+            if (user) {
+                setUser(user)
+                router.push("/");
+            }
         }
         catch (exception) {
             console.log(exception)
@@ -25,26 +33,35 @@ export default function Login() {
     }
     return (
         <PageLayout>
-            <h1>
-                hello
+            <h1 className={styles.subtitle}>
+                Login
             </h1>
-            <div className={styles.container}>
+            <div >
                 <main>
-                    <form onSubmit={handleSubmit}>
-                        <label>Enter UserName</label>
-                        <input
-                            value={username}
-                            onChange={(event) => setUsername(event.target.value)}
-                        />
-                        <label>Enter UserName</label>
-                        <input
-                            value={password}
-                            onChange={(event) => setPassword(event.target.value)}
-                        />
-                        <button>submit</button>
-                    </form>
+                    <div>
+                        <form id="my-form-id" onSubmit={handleSubmit} className={styles.main}>
+                            <TextField
+                                id="outlined-basic"
+                                label="Username"
+                                variant="outlined"
+                                required
+                                value={username}
+                                onChange={(event) => setUsername(event.target.value)}
+                            />
+                            <TextField
+                                id="outlined-basic"
+                                label="Password"
+                                variant="outlined"
+                                type="password"
+                                required
+                                value={password}
+                                onChange={(event) => setPassword(event.target.value)}
+                            />
+                            <Button type="submit" form="my-form-id" variant="contained">Submit</Button>
+                        </form>
+                    </div>
                 </main>
-            </div>
-        </PageLayout>)
+            </div >
+        </PageLayout >)
 }
 

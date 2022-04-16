@@ -3,13 +3,21 @@
 }
 
 .main {
-  min-height: 100vh;
-  padding: 4rem 0;
-  flex: 1;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  padding: 0 2rem;
+  justify-content: space-around;
+  width: 25ch;
+  height: 20ch;
+
+}
+
+.formElement {
+  padding-top: 20px;
+}
+
+.button {
+  background-color: #1976d2;
 }
 
 .footer {
@@ -48,6 +56,10 @@
 .title,
 .description {
   text-align: center;
+}
+
+.subtitle {
+  margin-left: 30px
 }
 
 .description {
