@@ -2,7 +2,8 @@ import { useState } from 'react'
 import { PageLayout } from '../Components/PageLayout'
 import styles from '../styles/Home.module.css'
 import updateService from '../services/SignUp'
-
+import { TextField } from '@mui/material'
+import { Button } from '@mui/material'
 
 export default function Login() {
     const [password, setPassword] = useState("")
@@ -11,12 +12,11 @@ export default function Login() {
 
 
     const handleSubmit = async (event) => {
-        event.preventDefault;
+        event.preventDefault();
         try {
             const user = await updateService({
                 username, password, email
             });
-            console.log(user)
         }
         catch (exception) {
             console.log(exception)
@@ -27,31 +27,44 @@ export default function Login() {
     }
     return (
         <PageLayout>
-            <h1>
-                hello
+            <h1 className={styles.subtitle}>
+                Sign Up
             </h1>
-            <div className={styles.container}>
+            <div >
                 <main>
-                    <form onSubmit={handleSubmit}>
-                        <label>Enter UserName</label>
-                        <input
-                            value={username}
-                            onChange={(event) => setUsername(event.target.value)}
-                        />
-                        <label>Enter Password</label>
-                        <input
-                            value={password}
-                            onChange={(event) => setPassword(event.target.value)}
-                        />
-                        <label>Enter Email</label>
-                        <input
-                            value={email}
-                            onChange={(event) => setEmail(event.target.value)}
-                        />
-                        <button>submit</button>
-                    </form>
+                    <div>
+                        <form id="my-form-id" onSubmit={handleSubmit} className={styles.signup}>
+                            <TextField
+                                id="outlined-basic"
+                                label="Username"
+                                variant="outlined"
+                                required
+                                value={username}
+                                onChange={(event) => setUsername(event.target.value)}
+                            />
+                            <TextField
+                                id="outlined-basic"
+                                label="Password"
+                                variant="outlined"
+                                type="password"
+                                required
+                                value={password}
+                                onChange={(event) => setPassword(event.target.value)}
+                            />
+                            <TextField
+                                id="outlined-basic"
+                                label="Email"
+                                variant="outlined"
+                                type="email"
+                                required
+                                value={email}
+                                onChange={(event) => setEmail(event.target.value)}
+                            />
+                            <Button type="submit" form="my-form-id" variant="contained">Submit</Button>
+                        </form>
+                    </div>
                 </main>
-            </div>
+            </div >
         </PageLayout>)
 }
 

@@ -2,13 +2,22 @@
   padding: 0 2rem;
 }
 
-.main {
+.login {
   display: flex;
   flex-direction: column;
   padding: 0 2rem;
   justify-content: space-around;
   width: 25ch;
   height: 20ch;
+}
+
+.signup {
+  display: flex;
+  flex-direction: column;
+  padding: 0 2rem;
+  justify-content: space-around;
+  width: 25ch;
+  height: 27.5ch;
 
 }
 

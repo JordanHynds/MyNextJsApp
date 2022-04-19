@@ -4,7 +4,6 @@ import { useAppContext } from '../Context'
 
 export default function Home() {
   const { user } = useAppContext();
-  console.log(user)
   return (
     <PageLayout>
       <div className={styles.container}>

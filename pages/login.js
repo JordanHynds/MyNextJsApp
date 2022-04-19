@@ -21,6 +21,7 @@ export default function Login() {
             })
             if (user) {
                 setUser(user)
+                localStorage.setItem('user', user);
                 router.push("/");
             }
         }
@@ -39,7 +40,7 @@ export default function Login() {
             <div >
                 <main>
                     <div>
-                        <form id="my-form-id" onSubmit={handleSubmit} className={styles.main}>
+                        <form id="my-form-id" onSubmit={handleSubmit} className={styles.login}>
                             <TextField
                                 id="outlined-basic"
                                 label="Username"

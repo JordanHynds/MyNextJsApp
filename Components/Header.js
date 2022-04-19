@@ -4,19 +4,30 @@ import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
-import { Button } from "@mui/material";
+import styles from '../styles/Home.module.css';
 import { useAppContext } from '../Context'
 import { useRouter } from "next/router";
-
+import { useEffect } from "react";
 
 export const Header = () => {
     const { user, setUser } = useAppContext();
     const router = useRouter()
+
     const Logout = () => {
         setUser(null)
+        localStorage.setItem('user', null);
         router.push("/login");
     }
-    if (user) {
+
+    useEffect(() => {
+        if ((typeof window !== "undefined") && (user == null)) {
+            setUser(localStorage.getItem('user'));
+        }
+    });
+
+
+    if (user != 'null') {
+        console.log(user)
         return (
             <Box sx={{ flexGrow: 1 }}>
                 <AppBar position="static">
@@ -25,7 +36,10 @@ export const Header = () => {
                             <Link href="/">Home</Link>
                         </Typography>
                         <Typography variant="h6" component="div" sx={{ flexGrow: 16 }}>
-                            <Button onClick={Logout} color="inherit">Logout</Button>
+                            <a href="#" onClick={Logout} color="inherit">Logout</a>
+                        </Typography>
+                        <Typography variant="h6" component="div" >
+                            {user} is logged in
                         </Typography>
                     </Toolbar>
                 </AppBar>
