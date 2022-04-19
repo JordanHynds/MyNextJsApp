@@ -13,6 +13,12 @@ export default function Login() {
     const { setUser } = useAppContext();
     const router = useRouter()
 
+
+    const handleUsername = (value) => {
+        const username = value.replace(/\s/g, '')
+        setUsername(username)
+    }
+
     const handleSubmit = async (event) => {
         event.preventDefault();
         try {
@@ -45,9 +51,10 @@ export default function Login() {
                                 id="outlined-basic"
                                 label="Username"
                                 variant="outlined"
+                                type="text"
                                 required
                                 value={username}
-                                onChange={(event) => setUsername(event.target.value)}
+                                onChange={(event) => handleUsername(event.target.value)}
                             />
                             <TextField
                                 id="outlined-basic"

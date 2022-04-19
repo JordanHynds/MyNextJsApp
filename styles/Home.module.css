@@ -11,6 +11,15 @@
   height: 20ch;
 }
 
+.note {
+  display: flex;
+  flex-direction: column;
+  padding: 0 2rem;
+  justify-content: space-around;
+  width: 70ch;
+  height: 12ch;
+}
+
 .signup {
   display: flex;
   flex-direction: column;

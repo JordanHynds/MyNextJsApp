@@ -27,16 +27,18 @@ export const Header = () => {
 
 
     if (user != 'null') {
-        console.log(user)
         return (
             <Box sx={{ flexGrow: 1 }}>
                 <AppBar position="static">
                     <Toolbar>
-                        <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+                        <Typography variant="h6" component="div" sx={{ flexGrow: 2 }}>
                             <Link href="/">Home</Link>
                         </Typography>
-                        <Typography variant="h6" component="div" sx={{ flexGrow: 16 }}>
+                        <Typography variant="h6" component="div" sx={{ flexGrow: 2 }}>
                             <a href="#" onClick={Logout} color="inherit">Logout</a>
+                        </Typography>
+                        <Typography variant="h6" component="div" sx={{ flexGrow: 20 }}>
+                            <Link href="/createnote">Create a Note</Link>
                         </Typography>
                         <Typography variant="h6" component="div" >
                             {user} is logged in

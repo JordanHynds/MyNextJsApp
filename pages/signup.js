@@ -4,23 +4,28 @@ import styles from '../styles/Home.module.css'
 import updateService from '../services/SignUp'
 import { TextField } from '@mui/material'
 import { Button } from '@mui/material'
+import { useRouter } from 'next/router'
 
 export default function Login() {
     const [password, setPassword] = useState("")
     const [username, setUsername] = useState("")
     const [email, setEmail] = useState("")
+    const router = useRouter()
 
-
+    const handleUsername = (value) => {
+        const username = value.replace(/\s/g, '')
+        setUsername(username)
+    }
     const handleSubmit = async (event) => {
         event.preventDefault();
         try {
             const user = await updateService({
                 username, password, email
             });
+            router.push("/");
         }
         catch (exception) {
             console.log(exception)
-
         }
 
 
@@ -38,9 +43,10 @@ export default function Login() {
                                 id="outlined-basic"
                                 label="Username"
                                 variant="outlined"
+                                type="text"
                                 required
                                 value={username}
-                                onChange={(event) => setUsername(event.target.value)}
+                                onChange={(event) => handleUsername(event.target.value)}
                             />
                             <TextField
                                 id="outlined-basic"
@@ -55,6 +61,7 @@ export default function Login() {
                                 id="outlined-basic"
                                 label="Email"
                                 variant="outlined"
+                                pattern=".+@globex\.com"
                                 type="email"
                                 required
                                 value={email}
