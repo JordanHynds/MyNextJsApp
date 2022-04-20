@@ -14,7 +14,6 @@ export default function CreateNote() {
 
     const handleSubmit = async (event) => {
         event.preventDefault();
-        console.log(note)
         try {
             const notes = await createNoteService({
                 note, user
