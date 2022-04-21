@@ -8,10 +8,11 @@ import { useEffect } from 'react';
 export default function Home() {
   const { user } = useAppContext();
   const [notes, setNotes] = useState([]);
+  const [check, setCheck] = useState(false);
 
   useEffect(() => {
     getnotes()
-  }, [user]);
+  }, [user, check]);
 
   const getnotes = async () => {
     try {
@@ -19,19 +20,30 @@ export default function Home() {
         user
       });
       setNotes(notes)
+      setCheck(true)
     }
     catch (exception) {
       console.log(exception)
     }
   }
 
-  return (
-    <PageLayout>
-      <div className={styles.container}>
-        <h1 className={styles.title}>Notes</h1>
-      </div>
-      <div className={styles.displayNote}>
-        {notes.map(note => { return <div key={note.note}>{note.note}</div> })}
-      </div>
-    </PageLayout>)
+  if (user) {
+    return (
+      <PageLayout>
+        <div className={styles.container}>
+          <h1 className={styles.title}>Notes</h1>
+        </div>
+        <div className={styles.displayNote}>
+          {notes.map(note => { return <div key={note.note}>{note.note}</div> })}
+        </div>
+      </PageLayout>)
+  }
+  else {
+    return (
+      <PageLayout>
+        <div className={styles.container}>
+          <h1 className={styles.title}>Notes</h1>
+        </div>
+      </PageLayout>)
+  }
 }
