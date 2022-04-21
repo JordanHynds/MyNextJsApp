@@ -34,6 +34,21 @@ export async function getStaticProps({ params }) {
 
 
 export default function User({ postData }) {
+
+    const handleSubmit = async (event) => {
+        event.preventDefault();
+        try {
+            const notes = await createNoteService({
+                note, user
+            });
+            setNote("")
+        }
+        catch (exception) {
+            console.log(exception)
+        }
+    }
+
+
     return (
         <PageLayout>
             <div>
@@ -43,7 +58,7 @@ export default function User({ postData }) {
                 <div className={styles.displayNote}>
                     {postData.map(note => { return <div key={note.note}>{note.note}</div> })}
                 </div>
-                <Button type="submit" form="my-form-id" variant="contained">Submit</Button>
+                <Button onClick={() => { }} variant="contained">Submit</Button>
             </div>
         </PageLayout >
     )
