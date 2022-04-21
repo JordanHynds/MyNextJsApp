@@ -23,9 +23,8 @@ export default function CreateNote() {
         catch (exception) {
             console.log(exception)
         }
-
-
     }
+
     return (
         <PageLayout>
             <h1 className={styles.subtitle}>
