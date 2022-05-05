@@ -34,7 +34,15 @@ export default function Home() {
           <h1 className={styles.title}>Notes</h1>
         </div>
         <div className={styles.displayNote}>
-          {notes.map(note => { return <div key={note.note}>{note.note}</div> })}
+          {notes.map(note => {
+            return (
+              <div key={note.note}>
+                <div key={note.note}>{note.note}</div>
+                <div key={note.create_date}>{note.create_date}</div>
+                <div key={note.likebutton}>{note.likebutton}</div>
+              </div>
+            )
+          })}
         </div>
       </PageLayout>)
   }

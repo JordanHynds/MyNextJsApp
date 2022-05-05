@@ -3,6 +3,8 @@ const pathsBaseUrl = "http://localhost:3000/api/getusers"
 const propsBaseUrl = "http://localhost:3000/api/getnotes"
 import styles from '../../styles/Home.module.css'
 import { Button } from '@mui/material'
+import likeNoteService from '../../services/LikeNote'
+import { useState } from 'react'
 
 export async function getStaticPaths() {
     const res = await fetch(pathsBaseUrl)
@@ -34,14 +36,15 @@ export async function getStaticProps({ params }) {
 
 
 export default function User({ postData }) {
+    const [notes, setNote] = useState(postData)
 
-    const handleSubmit = async (event) => {
-        event.preventDefault();
+    const handleLike = async (note) => {
         try {
-            const notes = await createNoteService({
-                note, user
+            const id = note.id
+            const notes = await likeNoteService({
+                id
             });
-            setNote("")
+            setNote(notes.rows)
         }
         catch (exception) {
             console.log(exception)
@@ -56,9 +59,16 @@ export default function User({ postData }) {
                     <h1 className={styles.title}>Notes</h1>
                 </div>
                 <div className={styles.displayNote}>
-                    {postData.map(note => { return <div key={note.note}>{note.note}</div> })}
+                    {notes.map(note => {
+                        return (
+                            <div key={note.note}>
+                                <div key={note.note}>{note.note}</div>
+                                <div key={note.create_date}>{note.create_date}</div>
+                                <div key={note.likebutton}>{note.likebutton}</div>
+                                <Button onClick={() => handleLike(note)} variant="contained">Like</Button>
+                            </div>)
+                    })}
                 </div>
-                <Button onClick={() => { }} variant="contained">Submit</Button>
             </div>
         </PageLayout >
     )
